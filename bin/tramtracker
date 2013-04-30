@@ -1,0 +1,33 @@
+#!/usr/bin/env ruby
+require 'tramtracker'
+require 'optparse'
+
+optparse = OptionParser.new do |opts|
+  opts.banner = "Usage: tramtracker [options] <stop-id>"
+
+  # opts.on('-p', '--poll', "Poll every 15 seconds") do
+  #   options[:interval] = 15
+  #   options[:max_iterations] = 60
+  # end
+
+  opts.on('-h', '--help', 'Display this screen') do
+    puts opts
+    exit
+  end
+end
+optparse.parse!
+
+id = ARGV[0]
+# f = "#{ENV['HOME']}/.tramtracker"
+# id ||= File.read(f) if File.exists?(f)
+
+unless id
+  puts optparse
+  exit 1
+end
+
+
+puts Time.now
+Tramtracker.new(id).get.each do |tram|
+  printf "Route %3s arriving in %2s minutes\n", tram[:route], tram[:minutes]
+end
