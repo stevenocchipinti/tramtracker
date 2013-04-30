@@ -9,8 +9,8 @@ class Tramtracker
     regex = /\d*\) Rte (\d*)<br>\r\n(\d*)/
     open(@url).read.scan(regex).collect do |route, minutes|
       {
-        route: route,
-        minutes: minutes
+        :route => route,
+        :minutes => minutes
       }
     end
   end
