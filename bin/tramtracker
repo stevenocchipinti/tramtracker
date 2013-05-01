@@ -18,8 +18,8 @@ end
 optparse.parse!
 
 id = ARGV[0]
-# f = "#{ENV['HOME']}/.tramtracker"
-# id ||= File.read(f) if File.exists?(f)
+dotfile = "#{ENV['HOME']}/.tramtracker"
+id ||= File.read(dotfile) if File.exists?(dotfile)
 
 unless id
   puts optparse
