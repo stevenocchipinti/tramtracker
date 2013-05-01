@@ -4,7 +4,7 @@ $LOAD_PATH.unshift(lib) unless $LOAD_PATH.include?(lib)
 
 Gem::Specification.new do |gem|
   gem.name          = "tramtracker"
-  gem.version       =  "0.0.2"
+  gem.version       =  "0.0.3"
   gem.authors       = ["Steven Occhipinti"]
   gem.email         = ["dev@stevenocchipinti.com"]
   gem.description   = "A commandline tool for Melbourne's TramTracker"
