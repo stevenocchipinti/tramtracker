@@ -7,13 +7,17 @@ A commandline tool for Melbourne's TramTracker
 Installation
 ------------
 
-`gem install tramtracker`
+```
+gem install tramtracker
+```
 
 
 Basic usage
 -----------
 
-`tramtracker <stop-id>`
+```
+tramtracker <stop-id>
+```
 
 
 Configuration
