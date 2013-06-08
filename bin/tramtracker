@@ -1,5 +1,9 @@
 #!/usr/bin/env ruby
+
+$LOAD_PATH.unshift File.expand_path('../../lib', __FILE__)
 require 'tramtracker'
+require 'formatters'
+
 require 'optparse'
 
 optparse = OptionParser.new do |opts|
@@ -27,7 +31,7 @@ unless id
 end
 
 
-puts Time.now
-Tramtracker.new(id).get.each do |tram|
-  printf "Route %3s arriving in %2s minutes\n", tram[:route], tram[:minutes]
-end
+tramtracker = Tramtracker.new(id)
+formatter = Formatters::PrintFormatter.new(tramtracker)
+
+formatter.report
