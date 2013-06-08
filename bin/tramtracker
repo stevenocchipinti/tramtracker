@@ -33,4 +33,9 @@ unless id
 end
 
 
-formatter_class.new(Tramtracker.new(id)).report
+begin
+  formatter_class.new(Tramtracker.new(id)).report
+rescue Interrupt
+  # Prevent the Exception stack trace from being printed upon ctrl-c
+  puts  # This just puts the next prompt on its own line
+end
