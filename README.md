@@ -15,8 +15,19 @@ gem install tramtracker
 Basic usage
 -----------
 
+To simply print the next trams for a given stop:
 ```
 tramtracker <stop-id>
+```
+
+To poll at a regular interval, use the -p option:
+```
+tramtracker -p <stop-id>
+```
+
+To see the help information, use the -h options:
+```
+tramtracker -h
 ```
 
 
