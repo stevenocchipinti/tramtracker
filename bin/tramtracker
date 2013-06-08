@@ -1,18 +1,21 @@
 #!/usr/bin/env ruby
-
 $LOAD_PATH.unshift File.expand_path('../../lib', __FILE__)
+
+require 'optparse'
 require 'tramtracker'
 require 'formatters'
 
-require 'optparse'
+
+formatter_class = Formatters::PrintFormatter
+dotfile = "#{ENV['HOME']}/.tramtracker"
+
 
 optparse = OptionParser.new do |opts|
   opts.banner = "Usage: tramtracker [options] <stop-id>"
 
-  # opts.on('-p', '--poll', "Poll every 15 seconds") do
-  #   options[:interval] = 15
-  #   options[:max_iterations] = 60
-  # end
+  opts.on('-p', '--poll', "Poll every 15 seconds") do
+    formatter_class = Formatters::PollingFormatter
+  end
 
   opts.on('-h', '--help', 'Display this screen') do
     puts opts
@@ -21,17 +24,13 @@ optparse = OptionParser.new do |opts|
 end
 optparse.parse!
 
-id = ARGV[0]
-dotfile = "#{ENV['HOME']}/.tramtracker"
-id ||= File.read(dotfile) if File.exists?(dotfile)
 
+id = ARGV[0]
+id ||= File.read(dotfile) if File.exists?(dotfile)
 unless id
   puts optparse
   exit 1
 end
 
 
-tramtracker = Tramtracker.new(id)
-formatter = Formatters::PrintFormatter.new(tramtracker)
-
-formatter.report
+formatter_class.new(Tramtracker.new(id)).report

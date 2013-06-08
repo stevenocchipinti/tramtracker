@@ -5,8 +5,8 @@ module Formatters
     end
 
     def report
-      puts Time.now
-      puts "Retrieving information for stop id: #{@tramtracker.stop_id}"
+      puts Time.now.strftime "[%H:%M:%S] Stop #{@tramtracker.stop_id}"
+      puts "Retrieving tram information..."
       @tramtracker.get.each do |tram|
         printf "Route %3s arriving in %2s minutes\n",
           tram[:route],
