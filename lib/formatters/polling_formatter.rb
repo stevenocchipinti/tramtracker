@@ -6,7 +6,7 @@ module Formatters
 
     def initialize(tramtracker)
       @tramtracker = tramtracker
-      @delay_interval = 3
+      @delay_interval = 15
       @max_iterations = 60
     end
 
