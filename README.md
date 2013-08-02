@@ -34,5 +34,5 @@ tramtracker -h
 Configuration
 -------------
 
-You may create a `~/.tramtracker` file containing the <stop-id> and omit the
+You may create a `~/.tramtracker` file containing the `stop-id` and omit the
 command line argument
