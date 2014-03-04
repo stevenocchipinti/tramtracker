@@ -1,9 +1,9 @@
 require_relative '../spec_helper'
 
-describe Tramtracker do
+describe Tramtracker::API do
 
   before do
-    @tramtracker = Tramtracker.new(1111)
+    @tramtracker = Tramtracker::API.new(1111)
     @mock_response = File.read("spec/fixtures/tramtracker.json")
   end
 

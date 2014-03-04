@@ -1,10 +1,11 @@
 # -*- encoding: utf-8 -*-
 lib = File.expand_path('../lib', __FILE__)
 $LOAD_PATH.unshift(lib) unless $LOAD_PATH.include?(lib)
+require './lib/tramtracker/version'
 
 Gem::Specification.new do |gem|
   gem.name          = "tramtracker"
-  gem.version       =  "0.0.4"
+  gem.version       =  Tramtracker::VERSION
   gem.authors       = ["Steven Occhipinti"]
   gem.email         = ["dev@stevenocchipinti.com"]
   gem.description   = "A commandline tool for Melbourne's TramTracker"
