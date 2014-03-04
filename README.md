@@ -1,6 +1,8 @@
 Tramtracker
 ===========
 
+[![Code Climate](https://codeclimate.com/github/stevenocchipinti/tramtracker.png)](https://codeclimate.com/github/stevenocchipinti/tramtracker)
+
 A commandline tool for Melbourne's TramTracker
 
 
