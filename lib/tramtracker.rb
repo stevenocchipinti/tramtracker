@@ -1,6 +1,9 @@
 require 'open-uri'
+require 'json'
+require 'date'
 
 class Tramtracker
+  DATE_FORMAT = "/Date(%Q%z)/"
   attr_accessor :stop_id
 
   def initialize(stop_id)
@@ -8,19 +11,30 @@ class Tramtracker
   end
 
   def get
-    regex = /\d*\) Rte (\d*)<br>\r\n(\d*)/
-    open(url).read.scan(regex).collect do |route, minutes|
+    api_response["responseObject"].collect do |tram|
       {
-        route: route,
-        minutes: minutes
+        route: tram["RouteNo"],
+        minutes: minutes_until(tram["PredictedArrivalDateTime"])
       }
     end
   end
 
+
   private
 
-  def url
-    "http://www.tramtracker.com.au/?id=#{@stop_id}"
+  def api_url
+    "http://www.tramtracker.com.au/Controllers/GetNextPredictionsForStop.ashx?stopNo=#{@stop_id}&routeNo=0&isLowFloor=false"
+  end
+
+  def api_response
+    JSON.parse(open(api_url).read).tap do |response|
+      @request_time = DateTime.strptime(response["timeResponded"], DATE_FORMAT)
+    end
+  end
+
+  def minutes_until(timestamp)
+    arrival_time = DateTime.strptime(timestamp, DATE_FORMAT)
+    ((arrival_time - @request_time) * 24 * 60).to_i
   end
 
 end
